@@ -1,0 +1,19 @@
+#summary Fonctionnement du protocole de Diskutim et description des codes retour
+
+=Description du protocole et des commandes client=
+
+== Description du protocole ==
+
+Le serveur n'envoie que des messages commençant par un slash ("/"). Note : le symbole "+" utilisé ci-dessous est le symbole du séparateur, configurable.
+
+  * *{{{/USERS+user1+user2+user3...}}}* : transmet une liste d'utilisateurs connectés au service de l'utilisateur;
+  * *{{{/SERVICES+service1+service2+service3...}}}* : transmet une liste de services disponibles server-side;
+  * *{{{/MSG[Token]Message[Token]Auteur[Token]Services}}}* : transmet un message, son auteur et le service concerné
+  * *{{{/SYS+XXX <info>}}}* : transmet le code erreur XXX et les info associées (facultatives)
+
+== Commandes client ==
+
+Le client dispose des commandes suivantes :
+  * */services* : demande la liste des services disponibles
+  * */users* : demande la liste des utilisateurs connectés au service
+  * */quit* : déconnecte le client
