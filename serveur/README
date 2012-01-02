@@ -1,0 +1,32 @@
+ _____ _____  _____ _  ___    _ _______ _____ __  __ 
+|  __ \_   _|/ ____| |/ / |  | |__   __|_   _|  \/  |
+| |  | || | | (___ | ' /| |  | |  | |    | | | \  / |
+| |  | || |  \___ \|  < | |  | |  | |    | | | |\/| |
+| |__| || |_ ____) | . \| |__| |  | |   _| |_| |  | |
+|_____/_____|_____/|_|\_\\____/   |_|  |_____|_|  |_|
+
+
+======== LICENCE ========
+
+  * Ce programme est sous licence GPLv2, ci-jointe.
+
+====== DEPENDANCES ======
+
+  * Bibliotheques cryptographiques :
+	$ aptitude install gcrypt-lib
+	$ yum install gcrypt-devel
+
+====== COMPILATION ======
+
+  * Compiler :
+	$ make
+
+======= EXECUTION =======
+
+  * Lancer le serveur
+  * $ ./bin/diskutim
+
+======= UTILISATEUR PAR DEFAUT =======
+
+  * Login : root
+  * Password : root
