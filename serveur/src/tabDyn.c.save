@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "Element.h"
+#include "tabDyn.h"
+
+
+void supprimeDernierElement(Tab_Dynamique * t)
+{
+	t->derniere_position--;
+}
+
+void modifierIemeElement(Tab_Dynamique * t,Element e,unsigned int i)
+{
+	t->ad[i] = e;
+}
+
+
+Element valeurIemeElementTabDyn(const Tab_Dynamique * t, unsigned int i)
+{
+	return t->ad[i];
+}
+
+void afficheTabDyn(const Tab_Dynamique *t)
+{
+	int i;
+	for (i=0; i<t->derniere_position;i++)
+	{
+	afficheElement(t->ad[i]);
+	}
+}
+
+int rechercheElementTabDyn(const Tab_Dynamique *t,Element e)
+{
+	int i;
+	for (i=0; i<t->derniere_position;i++)
+	{
+		if (t->ad[i] == e)
+		return i;
+	}
+
+	return -1;
+}
+
+
+void initialiser_tab(Tab_Dynamique * tab)
+{
+	tab->ad = (Element*) malloc(sizeof(Element));
+	tab->capacite = 1;
+	tab->derniere_position = 0;
+}
+
+void testament_tab(Tab_Dynamique * tab)
+{
+
+	if(tab->ad != 0)
+	{
+		free(tab->ad);
+		tab->ad = 0;
+		tab->capacite = 0;
+
+	}
+}
+
+void ajoutElement_tab(Tab_Dynamique * tab,Element x)
+{
+
+	int i;
+	Element* temp = tab->ad;
+
+	if (tab->capacite == tab->derniere_position)
+	{
+
+	tab->ad = (Element*)malloc(sizeof(Element)*(tab->capacite)*2);
+
+		for(i=0;i<=tab->capacite;i++)
+		{
+
+			 tab->ad[i] = temp[i];
+
+		}
+
+		tab->capacite *= 2;
+		free(temp);
+
+	}
+
+	tab->ad[tab->derniere_position] = x;
+	tab->derniere_position++;
+
+}
+

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Client GTK v1" />
+		<Option makefile="makefile" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Client GTK v1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DGSEAL_ENABLE -pthread -I/usr/include/gtk-3.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12" />
+				</Compiler>
+				<Linker>
+					<Add option="-pthread -lgtk-3 -lgdk-3 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpng12 -lm -lcairo-gobject -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0" />
+				</Linker>
+				<MakeCommands>
+					<Build command="make GUI=nogui" />
+					<CompileFile command="make $file GUI=nogui" />
+					<Clean command="make clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="make GUI=nogui" />
+					<SilentBuild command="make GUI=nogui" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Client GTK v1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="makefile" />
+		<Unit filename="src/gui/gtk/gtkgui_adapted_functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gui/gtk/gtkgui_adapted_functions.h" />
+		<Unit filename="src/gui/gtk/gtkgui_create_widgets.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gui/gtk/gtkgui_create_widgets.h" />
+		<Unit filename="src/gui/gtk/gtkgui_main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gui/gtk/gtkgui_main.h" />
+		<Unit filename="src/gui/nogui/nogui_adapted_functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gui/nogui/nogui_adapted_functions.h" />
+		<Unit filename="src/gui/nogui/nogui_main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gui/nogui/nogui_main.h" />
+		<Unit filename="src/inc_alllib.h" />
+		<Unit filename="src/inc_define.h" />
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_clients.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_clients.h" />
+		<Unit filename="src/network/manage_protocole.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_protocole.h" />
+		<Unit filename="src/network/manage_services.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_services.h" />
+		<Unit filename="src/network/manage_sockets.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_sockets.h" />
+		<Unit filename="src/network/manage_threads.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/manage_threads.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

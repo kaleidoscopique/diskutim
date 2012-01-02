@@ -1,0 +1,33 @@
+ _____ _____  _____ _  ___    _ _______ _____ __  __ 
+|  __ \_   _|/ ____| |/ / |  | |__   __|_   _|  \/  |
+| |  | || | | (___ | ' /| |  | |  | |    | | | \  / |
+| |  | || |  \___ \|  < | |  | |  | |    | | | |\/| |
+| |__| || |_ ____) | . \| |__| |  | |   _| |_| |  | |
+|_____/_____|_____/|_|\_\\____/   |_|  |_____|_|  |_|
+
+
+======== LICENCE ========
+
+  * Ce programme est sous licence GPLv2, ci-jointe.
+
+====== DEPENDANCES ======
+
+  * Bibliotheques graphiques : 
+	$ aptitude install gtk3+-lib
+	$ yum install gtk3+-devel
+
+====== COMPILATION ======
+
+  * Compiler sans interface graphique :
+	$ make GUI=nogui
+
+  * Compiler avec GTK :
+	$ make GUI=gtk
+
+======= EXECUTION =======
+
+  * Lancer le serveur
+  * Configurer ./data/config.ini
+  * $ ./bin/diskutim
+
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Serveur Sinfo" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Serveur Sinfo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lpthread -lgcrypt" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Serveur Sinfo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="data/users" />
+		<Unit filename="makefile" />
+		<Unit filename="src/TAD_element.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/TAD_element.h" />
+		<Unit filename="src/TAD_tabDyn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/TAD_tabDyn.h" />
+		<Unit filename="src/inc_alllib.h" />
+		<Unit filename="src/inc_define.h" />
+		<Unit filename="src/main_serveur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_auth.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_auth.h" />
+		<Unit filename="src/manage_clients.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_clients.h" />
+		<Unit filename="src/manage_protocole.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_protocole.h" />
+		<Unit filename="src/manage_services.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_services.h" />
+		<Unit filename="src/manage_sockets.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_sockets.h" />
+		<Unit filename="src/manage_threads.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/manage_threads.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
