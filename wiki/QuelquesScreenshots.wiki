@@ -1,0 +1,20 @@
+= Quelques captures d'écran de Diskutim client & serveur =
+
+Dans cet exemple, Diskutim est en production pour une PME qui souhaite mettre en relation les employés de ses différents services.
+
+== Le serveur en fonctionnement ==
+
+http://img7.uploadhouse.com/fileuploads/15166/15166945e92a852d7cb478e0bec88cbf5572b6d1.png
+
+== Le client console en utilisation ==
+
+http://img7.uploadhouse.com/fileuploads/15166/1516694287fc4fac4710be24207a4b1e8588be66.png
+
+
+== La fenêtre de login du client graphique ==
+
+http://img9.uploadhouse.com/fileuploads/15166/15166943b12d190698bd67ee54ce06a69bfbe09f.png
+
+== La fenêtre de discussion du client graphique ==
+
+http://img4.uploadhouse.com/fileuploads/15166/15166940de7826c771a95af7a76230907f501c4c.png
