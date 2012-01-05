@@ -24,9 +24,7 @@
 ======= EXECUTION =======
 
   * Lancer le serveur
-  * $ ./bin/serveur
+    $ ./bin/serveur
 
-======= UTILISATEUR PAR DEFAUT =======
+====================
 
-  * Login : root
-  * Password : root
