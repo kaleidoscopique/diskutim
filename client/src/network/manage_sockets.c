@@ -41,9 +41,6 @@ void create_socketC2S(int * sd,struct sockaddr_in * addr)
 		printf("Le serveur n'est pas connecté ! Veuillez contacter l'administrateur responsable.\n");
 		exit(0);
 	}
-
-	// Configuration de sd en mode NON bloquant
-	fcntl(*sd,F_SETFL,O_NONBLOCK);
 }
 
 
@@ -131,7 +128,6 @@ void* check_server_reply (void* arg)
 				break;
 			}
 		}
-		usleep(SLEEP_NONBLOCK); // Variable à optimiser
 	}
 
 	close(sd);
