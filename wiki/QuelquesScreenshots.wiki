@@ -1,3 +1,5 @@
+#summary Quelques screenshots du logiciel
+
 = Quelques captures d'écran de Diskutim client & serveur =
 
 Dans cet exemple, Diskutim est en production pour une PME qui souhaite mettre en relation les employés de ses différents services.
