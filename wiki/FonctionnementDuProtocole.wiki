@@ -1,10 +1,10 @@
-#summary Fonctionnement du protocole de Diskutim et description des codes retour
+#summary Fonctionnement du protocole DKTM
 
 =Description du protocole et des commandes client=
 
 == Description du protocole ==
 
-Le serveur n'envoie que des messages commençant par un slash ("/"). Note : le symbole "+" utilisé ci-dessous est le symbole du séparateur, configurable.
+Le serveur n'envoie que des messages commençant par un slash ("/"). 
 
   * *{{{/USERS+user1+user2+user3...}}}* : transmet une liste d'utilisateurs connectés au service de l'utilisateur;
   * *{{{/SERVICES+service1+service2+service3...}}}* : transmet une liste de services disponibles server-side;
