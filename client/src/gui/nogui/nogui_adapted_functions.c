@@ -8,6 +8,7 @@
 /**
 	Affiche la liste des fichiers shared dispo sur le serveur
 	@param listof Le tableau avec le nom des fichiers
+	@param nb_files Le nombre de fichier partagés par le serveur
 	@param useless le GTKwidget osef
 */
 void nogui_show_files_list(char listof[][MAX_SIZE_FILE_NAME],int nb_files, void* useless)
@@ -61,10 +62,12 @@ void nogui_show_users_list(Clients* listof,void* useless)
 /**
 	Gère l'affichage des messages systèmes ET des messages utilisateurs serveur côté NOGUI
 	@param useless Le gtkwidget dont on se fout ici
+	@param useless_ Le gtkwidget dont on se fout ici
 	@param author l'auteur du message
 	@param msg Le message
 	@param service Le service de l'utilisateur
 	@param code Le code du message SYS (si code != "", alors author msg et service == "", et vis et versa)
+	@param buffer Le buffer complet
 */
 void nogui_show_error_and_msg(void* useless,void* useless_,char* author,char* msg, char* service,int code,char* buffer)
 {

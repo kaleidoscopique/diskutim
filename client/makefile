@@ -49,3 +49,6 @@ ${OBJ_DIR}%.o:${SRC_DIR}gui/$(GUI)/%.c
 clean:
 	rm ${OBJ_DIR}*.o
 	rm -R ${BIN_DIR}*
+
+docu:
+	doxygen doc/doc.doxy

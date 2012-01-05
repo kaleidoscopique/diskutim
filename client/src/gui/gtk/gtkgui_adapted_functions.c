@@ -107,11 +107,16 @@ void gtkgui_show_users_list(Clients* listof,void* treeview)
 /**
 	Fonction d'affichage des erreurs serveurs ET des messages broadcasts pour GTK
 	@param textview Le widget textview à MAJ
+	@param window_connection Le widget de la fenêtre de connexion
+	@param author L'auteur du message
 	@param msg Le message à afficher ou...
-	@param code ... le code erreur à afficher
+	@param services Le service concerné par le message
+	@param code le code erreur à afficher
+	@param content_msg Le contenu brute
 	@note si code = 0, il s'agit d'un msg (cette fonction fait tout à la fois)
 */
-void gtkgui_show_error_and_msg(void* textview,void* window_connection,char* author,char* msg, char* services,int code,char* content_msg)
+void gtkgui_show_error_and_msg(void* textview,void* window_connection,char* author,
+															char* msg, char* services,int code,char* content_msg)
 {
 	char codeErr[MAX_SIZE]; // Reçoit (au besoin) un texte correspondant au code erreur "code"
 	GtkWidget* view;

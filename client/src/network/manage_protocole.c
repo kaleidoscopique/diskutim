@@ -92,7 +92,7 @@ void complete_data_msg(char*data, char* author,char* msg,char* service, char* ot
 
 /**
 	Retourne 1 si DATA est un message utilisateur client2client
-	@param data La chaine de caractère à tester
+	@param data_type La chaine de caractère à tester
 	@return 1 ou 0
 */
 int is_a_usrmsg(int data_type)
@@ -103,7 +103,7 @@ int is_a_usrmsg(int data_type)
 
 /**
 	Retourne 1 si DATA est la liste des services envoyée par le serveur
-	@param data La chaine de caractère à tester
+	@param data_type La chaine de caractère à tester
 	@return 1 ou 0
 */
 int is_listof_services(int data_type)
@@ -115,7 +115,7 @@ int is_listof_services(int data_type)
 /**
 	Retourne 1 si DATA est la liste des users connectés au même salon que le client
 	(liste envoyée par le serveur après /users)
-	@param data La chaine de caractère à tester
+	@param data_type La chaine de caractère à tester
 	@return 1 ou 0
 */
 int is_listof_users(int data_type)
@@ -126,7 +126,7 @@ int is_listof_users(int data_type)
 
 /**
 	Retourne 1 si DATA est un message serveur type "@500"
-	@param data La chaine de caractère à tester
+	@param data_type La chaine de caractère à tester
 	@return 1 ou 0
 */
 int is_a_sysmsg(int data_type)
@@ -213,7 +213,7 @@ int get_type_buffer(char* buffer)
 }
 
 /**
-	Evalue le code erreur \code et copie le message approprié dans \buffer
+	Evalue le code erreur code et copie le message approprié dans buffer
 	@param buffer Le retour de la fonction
 	@param code Le code erreur reçu
 	@param msg_content Le message brute (/SYS+XXX+........) sans modification; utile quelque fois (ex : code 700 ou retour /adduser)
@@ -259,3 +259,5 @@ void codeErr2char(char *buffer, int code,const char * msg_content)
 		default:strcpy(buffer,"Code erreur inconnu, veuillez contactez un administrateur (ou RTFM !).\n"); break;
 	}
 }
+
+

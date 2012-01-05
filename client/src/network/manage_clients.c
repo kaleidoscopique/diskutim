@@ -8,7 +8,7 @@
 	Enregistre la liste des clients connectés envoyée par le serveur dans un tableau de manière propre
 	data = +Client1+Client2+Client3...
 	@param data La chaine de caractère "sale" qui contient les clients connectés
-	@param listof_clients La structure qui va recevoir les clients de manière ordonnée
+	@param listof_online_clients La structure qui va recevoir les clients de manière ordonnée
 */
 void get_listof_online_clients(char* data, Clients* listof_online_clients)
 {

@@ -170,8 +170,9 @@ static void parse_ServerConfigFile(char* filename,char* server_ip,int* server_po
 
 /**
 	Transforme la liste rawdata (/FILES+file1+file2...) du serveur en un tableau à 2 dimensions exploitables client-side
-	@param buffer Les rawdata
+	@param data Les data brutes
 	@param files_list La liste à remplir
+	@param nb_files Le nombre de fichiers partagés
 */
 void complete_data_fileslist(char* data,char files_list[][MAX_SIZE_FILE_NAME],int * nb_files)
 {
@@ -193,6 +194,11 @@ void complete_data_fileslist(char* data,char files_list[][MAX_SIZE_FILE_NAME],in
 	}
 }
 
+/**
+	Récupère le contenu d'un fichier via un buffer envoyé par le serveur
+	@param buffer Reçoit un buffer rawdata avec le contenu d'un fichier
+	@param title [out] Récupère le nom du fichier récupéré
+*/
 void complete_data_filecontent(char* buffer,char* title)
 {
 	char temp[MAX_SIZE];

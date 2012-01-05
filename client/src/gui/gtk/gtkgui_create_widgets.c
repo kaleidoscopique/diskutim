@@ -99,10 +99,9 @@ void mygtk_clear_textview (GtkTextView *textview)
 }
 
 /**
-	Modifie le label \label et lui ajouter un texte type "Vous êtes connecté entant que .... (<service>)
-	@param Label [in,out] Le label à modifier
-	@param client_firstsname Le prénom du client à afficher dans le label
-	@param client_lastname Le nom du client ---
+	Modifie le label label et lui ajouter un texte type "Vous êtes connecté entant que .... [service]"
+	@param [in,out] label  Le label à modifier
+	@param client_username Le nom d'utilisateur du client
 	@param client_service Le service du client ---
 	@note Si les 3 const char sont NULL, alors on affiche une DECONNEXION ! ("Vous êtes déconnecté")
 */
@@ -133,6 +132,7 @@ void mygtk_set_label_information_connection(GtkLabel * label,
 	Créer une widget window préconfiguré pour être centrée
 	@param sizex La largeur de la fenêtre
 	@param sizey La hauteur de la fenêtre
+	@param FLAG Un flag GTK de création (GTK_WINDOW_TOPLEVEL par exemple)
 	@return Le widget de la fenètre
 */
 GtkWidget* mygtk_create_widget_window(int sizex,int sizey,int FLAG)
@@ -147,7 +147,7 @@ GtkWidget* mygtk_create_widget_window(int sizex,int sizey,int FLAG)
 
 
 /**
-	Crée un entrytext de taille \maxsize
+	Crée un entrytext de taille maxsize
 	@param maxsize La taille maximale du texte que l'on peut entrer
 	@return Le widget de l'entrytext
 */

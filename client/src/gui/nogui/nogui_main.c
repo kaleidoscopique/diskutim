@@ -4,8 +4,8 @@
 #include "../../network/manage_sockets.h"
 #include "../../network/manage_protocole.h"
 #include "../../network/manage_services.h"
-	#include "nogui_main.h"
-	#include "nogui_adapted_functions.h"
+#include "nogui_main.h"
+#include "nogui_adapted_functions.h"
 
 /**
 	Boucle principale pour gérer l'affichage du client /w NO GUI
@@ -14,7 +14,7 @@
 */
 void nogui_main (Param_thread * param,int sd)
 {
-	bind_param_thread(&param,sd,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+	bind_param_thread(param,sd,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 	init_functions_thread_for_nogui(&param);
 	pthread_t pth = new_thread(check_server_reply,(void*)param);
 
@@ -23,7 +23,7 @@ void nogui_main (Param_thread * param,int sd)
 	printf("=======================================\n");
 	printf("BIENVENUE INCONNU ! \n");
 	printf("Pour vous connecter à votre service, tapez la commande suivante :\n");
-	printf("/connect <prenom> <nom> <service>\n");
+	printf("/connect <username> <password> <service>\n");
 	printf("N'hésitez pas à demander de l'aide en tapant /help !\n");
 	printf("=======================================\n\n");
 	printf("> ");

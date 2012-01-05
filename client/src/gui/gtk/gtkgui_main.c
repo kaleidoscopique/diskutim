@@ -129,7 +129,7 @@ void gtkgui_main(Param_thread * param,int sd)
     gtk_window_set_keep_above(GTK_WINDOW(main_window),TRUE);
 
 	// Création du thread avec récupération des widgets GTK utiles
-	bind_param_thread(&param,sd,treeview_services,
+	bind_param_thread(param,sd,treeview_services,
 										GTKW_DiscW.treeview_users_list,
 										GTKW_DiscW.textview_discussion,
 										GTKW_SharedfW.treeview_files,
@@ -279,9 +279,9 @@ void callback_cliked_button_connection(GtkWidget* widget, gpointer data)
 	Active la fenêtre de discussion (quand connexion OK)
 	@param window Le Widget de la fenêtre de discussion crée au préalable qu'il faut afficher
 	@param description_label Le petit label à mettre à jour qui donne des info à l'utilisateur
-	@param param Les param du thread
 	@param sd Le client descriptor
-	@param client_firstname, client_lastname, client_service Des informations sur le client à afficher dans le label
+	@param client_username Le username du client
+	@param client_services Le service du client
 */
 void gtkgui_discussion (GtkWidget* window,GtkWidget* description_label, int sd,const char* client_username,char* client_services)
 {
@@ -294,6 +294,7 @@ void gtkgui_discussion (GtkWidget* window,GtkWidget* description_label, int sd,c
 
 /**
 	Fonction de callback lorsque l'utilisateur ouvre la fenêtre de shared files
+	@param widget Le widget considéré
 	@param gparam La structure callback_discussion avec tous les widgets importants
 */
 void callback_clicked_button_sharedfiles (GtkWidget* widget, gpointer gparam)
@@ -305,6 +306,7 @@ void callback_clicked_button_sharedfiles (GtkWidget* widget, gpointer gparam)
 
 /**
 	Fonction de callback lorsque l'utilisateur clique sur le bouton "lire le fichier" après l'avoir séléctionné dans la liste
+	@param widget Le widget considéré
 	@param gparam La structure callback_sharedfiles (armé du descripteur socket)
 */
 void callback_clicked_button_readfile(GtkWidget* widget, gpointer gparam)

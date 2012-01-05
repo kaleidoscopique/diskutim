@@ -1,3 +1,14 @@
+/**
+	@mainpage Diskutim Client
+	Pour apprendre à compiler et à utiliser Diskutim Client, lisez le README fourni en archive.
+
+
+	/!\ Pensez à lancer le serveur avant de lancer le client !
+
+	Bon tchat.
+
+*/
+
 // Temps de bloquage du serveur entre chaque requête en MICROSECONDES
 // 1 seconde = 1 000 000 microsecondes
 #define SLEEP_NONBLOCK 50//0//000

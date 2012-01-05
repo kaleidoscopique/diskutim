@@ -25,7 +25,7 @@ typedef struct {
 
 pthread_t new_thread(void*(*)(void *), void *);
 void init_param_thread(Param_thread** param);
-void bind_param_thread(Param_thread** param,
+void bind_param_thread(Param_thread* param,
 											int client_descriptor,
 											void* treeview_services_list,
 											void* treeview_users_list,

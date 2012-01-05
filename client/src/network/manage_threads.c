@@ -38,11 +38,17 @@ void init_param_thread(Param_thread** param)
 /**
 	Remplit une variable de type PARAM_THREAD avant de créer un thread
 	@param param L'adresse du pointeur sur la structure
-	@param T La liste globale des utilisateurs connectés au serveur
 	@param client_descriptor Le descripteur de socket relatif au client concerné par le thread
+	@param treeview_services_list La liste des services dispo
+	@param treeview_users_list La liste des utilisateurs connectés
+	@param textview_discussion Le bloc de discussion
+	@param treeview_files_list La liste des fichiers partagés
+	@param textview_file_content Le bloc de contenu d'un fichier
+	@param window_connection La fenêtre de connexion
+	@param window_discussion La fenêtre de discussion
 */
 
-void bind_param_thread(Param_thread** param,
+void bind_param_thread(Param_thread* param,
 											int client_descriptor,
 											void* treeview_services_list,
 											void* treeview_users_list,
@@ -52,14 +58,14 @@ void bind_param_thread(Param_thread** param,
 											void* window_connection,
 											void* window_discussion)
 {
-	(*param)->client_descriptor = client_descriptor;
+	param->client_descriptor = client_descriptor;
 	// Quand on lance un thread pour l'application GTK, on se met de côté les pointeurs ...
 	// ... vers les widgets à MAJ pendant le fonctionnement
-	(*param)->treeview_services_list = (void*) treeview_services_list;
-	(*param)->treeview_users_list = (void*) treeview_users_list;
-	(*param)->textview_discussion = (void*) textview_discussion;
-	(*param)->treeview_files_list = (void*) treeview_files_list;
-	(*param)->textview_file_content = (void*) textview_file_content;
-	(*param)->window_connection = (void*) window_connection;
-	(*param)->window_discussion = (void*) window_discussion;
+	param->treeview_services_list = (void*) treeview_services_list;
+	param->treeview_users_list = (void*) treeview_users_list;
+	param->textview_discussion = (void*) textview_discussion;
+	param->treeview_files_list = (void*) treeview_files_list;
+	param->textview_file_content = (void*) textview_file_content;
+	param->window_connection = (void*) window_connection;
+	param->window_discussion = (void*) window_discussion;
 }
