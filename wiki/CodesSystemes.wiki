@@ -2,7 +2,7 @@
 
 
 == Permissions ==
-200 - Autorisation refusée (problème de statut)
+200 - Autorisation refusée
 
 == Connexion ==
 400 - Connexion réussie
