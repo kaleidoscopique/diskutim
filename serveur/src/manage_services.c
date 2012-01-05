@@ -40,7 +40,7 @@ void complete_services_tab(TabServices * listof)
 	@param number Le numéro d'un service
 	@return Le nom d'un service
 */
-char* get_services_from_number(TabServices * listof, int number)
+const char* get_services_from_number(const TabServices * listof, int number)
 {
 	return listof->tab[number].name;
 }
@@ -51,7 +51,7 @@ char* get_services_from_number(TabServices * listof, int number)
 	@param service Le nom du service
 	@return Le numéro d'un service (-1 s'il n'existe pas)
 */
-int get_num_from_services(TabServices * listof, char* service)
+int get_num_from_services(const TabServices * listof, char* service)
 {
 	int i;
 	for(i=0;i<listof->nb_services;i++)
@@ -67,7 +67,7 @@ int get_num_from_services(TabServices * listof, char* service)
 	@param num_of_service Le numéro du service dont on veut connaître le nb d'users
 	@return Le nb d'users connectés au service num_of_service
 */
-int get_numberof_user(TabServices * listof, int num_of_service)
+int get_numberof_user(const TabServices * listof, int num_of_service)
 {
 	return get_nb_elements(listof->tab[num_of_service].listof_client_descriptors);
 }
@@ -90,7 +90,7 @@ void add_SD_online_user(TabServices* listof, int num_of_service, int sd)
 	@param i Le numéro de l'utilisateur
 	@return Le SD de l'utilisateur
 */
-int get_ith_sd(TabServices* listof, int num_of_service, int i)
+int get_ith_sd(const TabServices* listof, int num_of_service, int i)
 {
 	return valeurIemeElement_tab(listof->tab[num_of_service].listof_client_descriptors,i);
 }
@@ -100,7 +100,7 @@ int get_ith_sd(TabServices* listof, int num_of_service, int i)
 	@param param Le param thread classique
 	@return La liste des services globale
 */
-TabServices* get_listof_services(Param_thread * param)
+TabServices* get_listof_services(const Param_thread * param)
 {
 	return param->services_list;
 }
@@ -111,7 +111,7 @@ TabServices* get_listof_services(Param_thread * param)
 	@param n Le numéro du n-ième service que l'on veut récupérer
 	@return La structure Service du bon services
 */
-Service* get_the_nth_service(Param_thread * param, int n)
+Service* get_the_nth_service(const Param_thread * param, int n)
 {
 	return &(param->services_list->tab[n]);
 }
@@ -119,11 +119,11 @@ Service* get_the_nth_service(Param_thread * param, int n)
 /**
 	Plus précis que get_the_nth_service, cette fonction retourne
 	directement le tableau dynamique contenant les SD des connecté à un service
-	@param param Le PARAM_THREAD classique
+	@param listof La liste des services
 	@param n Le numéro du service qui nous intérèsse
 	@return Le tab dyn des SD des clients connectés du service numéro 'n'
 */
-Tab_Dynamique* get_the_nth_service_tab(TabServices * listof, int n)
+Tab_Dynamique* get_the_nth_service_tab(const TabServices * listof, int n)
 {
 	return listof->tab[n].listof_client_descriptors;
 }

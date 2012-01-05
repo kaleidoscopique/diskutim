@@ -1,3 +1,15 @@
+/**
+	@mainpage Diskutim Serveur
+		Bienvenue sur la documentation DISKUTIM SERVEUR.
+
+		Pour comprendre comment fonctionne le protocole DKTM, cliquez ici : http://code.google.com/p/diskutim/wiki/FonctionnementDuProtocole
+
+
+		Pour plus d'informations sur l'évolution du logiciel, rendez-vous sur notre espace Google Code : http://code.google.com/p/diskutim
+
+		Enjoy !
+*/
+
 // Temps de bloquage du serveur entre chaque requête en MICROSECONDES
 // 1 seconde = 1 000 000 microsecondes
 #define SLEEP_NONBLOCK 500000

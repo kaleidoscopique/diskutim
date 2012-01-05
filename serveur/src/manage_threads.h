@@ -39,6 +39,6 @@ typedef struct {
 void new_thread(void*(*)(void *), void *);
 
 void init_param_thread(Param_thread** param);
-void bind_param_thread(Param_thread** param, Tab_Dynamique* T, int client_descriptor, info_client * listof_info_clients, TabServices * services_list,int * index_db_users);
+void bind_param_thread(Param_thread* param, Tab_Dynamique* T, int client_descriptor, info_client * listof_info_clients, TabServices * services_list,int * index_db_users);
 
 #endif

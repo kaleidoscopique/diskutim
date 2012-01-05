@@ -28,3 +28,6 @@ ${OBJ_DIR}%.o:${SRC_DIR}%.c
 clean:
 	rm ${OBJ_DIR}*.o
 	rm ${BIN_DIR}*.out
+
+docu:
+	doxygen doc/doc.doxy

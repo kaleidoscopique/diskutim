@@ -39,13 +39,16 @@ void init_param_thread(Param_thread** param)
 	@param param L'adresse du pointeur sur la structure
 	@param T La liste globale des utilisateurs connectés au serveur
 	@param client_descriptor Le descripteur de socket relatif au client concerné par le thread
+	@param listof_info_clients La liste des fiches clients
+	@param services_list La liste des services
+	@param index_db_users L'index des users dans la DB
 */
 
-void bind_param_thread(Param_thread** param, Tab_Dynamique* T, int client_descriptor, info_client * listof_info_clients, TabServices * services_list,int * index_db_users)
+void bind_param_thread(Param_thread* param, Tab_Dynamique* T, int client_descriptor, info_client * listof_info_clients, TabServices * services_list,int * index_db_users)
 {
-	(*param)->clients_list = T;
-	(*param)->client_descriptor = client_descriptor;
-	(*param)->info_clients_list = listof_info_clients;
-	(*param)->services_list = services_list;
-	(*param)->index_db_users = index_db_users;
+	param->clients_list = T;
+	param->client_descriptor = client_descriptor;
+	param->info_clients_list = listof_info_clients;
+	param->services_list = services_list;
+	param->index_db_users = index_db_users;
 }

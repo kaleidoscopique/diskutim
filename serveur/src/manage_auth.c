@@ -1,6 +1,5 @@
 #include "inc_alllib.h"
 #include "inc_define.h"
-#include "manage_auth.h"
 #include <math.h>
 #include <ctype.h>
 #include <gcrypt.h>
@@ -24,7 +23,7 @@ int hash_index_users_bd(char* username)
 /**
 	Retourne l'empreinte md5 d'un buffer
 	@param [in] buffer Le buffer à hasher
-	@parma [out] md5sum Le résultat du hash
+	@param [out] md5sum Le résultat du hash
 */
 void get_md5sum(const char* buffer,char* md5sum)
 {
@@ -77,12 +76,12 @@ int parse_users_db(int* index)
 }
 
 /**
-	Récupère le tuple numéro \numindex dans la DB.
+	Récupère le tuple numéro numindex dans la DB.
 	@param num_index Le numếro du tuple à récupérer
 	@param index_db_users La table d'index "num tuple => num octet"
 	@param [out] surname, name, password, info Reçoivent les données trouvées
 					Peuvent être mis à NULL pour simplement avoir le retour de la fonction (sans remplir quoi que ce soit)
-	@return 0 si aucun tuple n'a été trouvé à l'indice \numindex
+	@return 0 si aucun tuple n'a été trouvé à l'indice index
 					1 si un tuple a été trouvé
 */
 int get_entry_db(int num_index,
@@ -139,6 +138,7 @@ int get_entry_db(int num_index,
 /**
 	Ajoute un utilisateur dans la DB users
 	@param buffer La commande /adduser .... envoyée par le client
+	@param index_db_users L'index des utilisateurs
 	@param [out] password Le mot de passe généré lors de l'ajout, à communiquer à l'utilisateur
 	@return 0 si l'utilisateur est ajouté, 1 s'il n'y a plus de place dans la DB
 	@note /adduser nom prenom rang

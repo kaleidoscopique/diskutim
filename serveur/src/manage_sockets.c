@@ -8,15 +8,15 @@
 	Affiche des informations sur l'état d'une connexion entre UN client et le serveur
 	@param [in] sd Le descripteur de la socket client
 */
-int who_connected (int sd)
+void who_connected (int sd)
 {
 	int size = sizeof(struct sockaddr);
 	struct sockaddr_in me, you;
 	struct hostent *h_you, *h_me;
 	unsigned long addr;
 
-	bzero(&me, sizeof(struct sockaddr));
-	bzero(&you, sizeof(struct sockaddr));
+	memset(&me,0, sizeof(struct sockaddr));
+	memset(&you,0, sizeof(struct sockaddr));
 
 	/* pour savoir de qui a qui est connecte notre socket */
 	getsockname(sd, (struct sockaddr*)&me, (socklen_t*)&size);
@@ -25,10 +25,8 @@ int who_connected (int sd)
 	h_you = gethostbyaddr((char*)&addr, sizeof(struct in_addr), AF_INET);
 	addr = inet_addr(inet_ntoa(me.sin_addr));
 	h_me = gethostbyaddr((char*)&addr, sizeof(struct in_addr), AF_INET);
-	printf("[%s:%i] connected at [%s:%i]\n", h_you->h_name, ntohs(you.sin_port),
+	printf("[%s:%i] se connecte à [%s:%i]\n", h_you->h_name, ntohs(you.sin_port),
 	h_me->h_name, ntohs(me.sin_port));
-
-	return 0;
 }
 
 /**
@@ -112,7 +110,8 @@ void create_socketS2C(int * sd_serv,struct sockaddr_in * addr)
 	Nettoie le tableau contenant les descripteurs des sockets connectés et déconnectés (supprime les négatifs)
 	(tableau de la forme {4,5,-6,7,-7,8} (< 0 => socket déconnecté précédemment)
 	@param clients_list La structure contenant les descripteurs de sockets
-	@param nb_connexion Le nombre de descripteurs à atteindre avant de nettoyer le tableau
+	@param nb_connexions Le nombre de descripteurs à atteindre avant de nettoyer le tableau
+	@return 1 si nettoyage, 0 si pas de nettoyage nécessaire
 */
 int clear_old_connexions(Tab_Dynamique * clients_list, int nb_connexions)
 {

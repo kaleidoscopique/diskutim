@@ -107,7 +107,7 @@ static int globaldata_evaluation(char* buffer, Param_thread * param)
 
 	// Si l'utilisateur ne fait pas de demande de connexion (ci-dessus),
 	// il doit être connecté pour envoyer une CMD ou un MSG
-	if(get_connected(sheet))
+	if(get_connected(sheet) == 1)
 	{
 		if(buffer[0] == '/') return cmd_evaluation(buffer,param); // S'il envoie une commande (commence par '/')
 		else return msg_evaluation(buffer,param); // Sinon, c'est simplement un message...
@@ -115,7 +115,7 @@ static int globaldata_evaluation(char* buffer, Param_thread * param)
 	else
 	{
 		// On envoie un message d'erreur 501 au client pour lui signaler l'erreur
-		printf("[ERROR] Le client %d utilise la commande \"%s\" sans être connecté.\n",sd,buffer);
+		printf("/!\\ Un client inconnu tente d'utiliser une commande protégée (%d - \"%s\").\n",sd,buffer);
 		strcpy(buffer,"/SYS");
 		strcat(buffer,TRAME_SEPARATOR);
 		strcat(buffer,"501");
@@ -134,12 +134,12 @@ static int globaldata_evaluation(char* buffer, Param_thread * param)
 static int cmd_evaluation(char* buffer, Param_thread * param)
 {
 		// -- Récupération de toutes les données utiles au traitement des commandes
-		int sd = param->client_descriptor; // SD du client courant
+		int sd = get_descriptor(param); // SD du client courant
 		info_client * listof_info_clients = get_info_clients_list(param); // Tableau de toutes les fiches clients
 		info_client * sheet = get_sheet(listof_info_clients,sd); // Fiche du client courant
 		TabServices * listof_services = get_listof_services(param); // Tableau de tous les services dispo (+ leurs users)
 		Service * client_service = get_the_nth_service(param,sheet->service); // Service de l'utilisateur courant
-		int* index_db_users = param->index_db_users; // L'index des lignes du fichier pour la hashtable
+		int* index_db_users = get_index_db_users(param); // L'index des lignes du fichier pour la hashtable
 
 		// -- Variables globales utilisées pour la gestion des erreurs
 		char data_error[MAX_SIZE]; // Tampon qui recevra des info à envoyer dans un message d'erreur /SYS+.....
@@ -154,7 +154,7 @@ static int cmd_evaluation(char* buffer, Param_thread * param)
 		char password[SHEET_MAX_SIZE] = {0}; // Stock le password généré lors de la commande /adduser
 
 		/* On vérifie si la commande qui commence par / est bien une commande reconnue */
-		printf("Commande reçue par %d : %s\n",sd,buffer);
+		printf("Un client utilise une commande (%d - \"%s\").\n",sd,buffer);
 
 		// ########## GESTION DE LA COMMANDE /CONNECT ############ //
 		if(!strncasecmp(buffer,"/connect",strlen("/connect")))
@@ -162,10 +162,10 @@ static int cmd_evaluation(char* buffer, Param_thread * param)
 			// Si la connexion se passe bien
 			if ((connection_error = CMD_CONNECT_exec(buffer,listof_info_clients+sd,param)) == 1)
 			{
-				printf("[CONNEXION] Le client %d a réussi à se connecter...\n",sd);
+				printf("Un client inconnu (%d) vient de s'authentifier...\n",sd);
 				printf("---------- %s %s\n",get_firstname(sheet),get_lastname(sheet));
 				printf("---------- Connecté à %s\n",get_service_char(listof_services,sheet));
-				printf("---------- Informations : %s\n",get_others(sheet));
+				printf("---------- Statut : %s\n",get_others(sheet));
 
 				// On envoie un message code 400 au client pour lui signaler que tout est OK
 				// @400 Prénom Nom Services
@@ -180,7 +180,7 @@ static int cmd_evaluation(char* buffer, Param_thread * param)
 			// S'il y a une erreur de connexion
 			else
 			{
-				printf("[ERROR {%d}] Connection (client %d) - \"%s\"\n",connection_error,sd,buffer);
+				printf("/!\\ ERREUR - Le client %d tente de se connecter mais sans succès (err %d - \"%s\").\n",connection_error,sd,buffer);
 
 				// On envoie un message d'erreur 30X au client pour lui signaler l'erreur de connexion
 				// @30X (ou X est un sous-code décrivant précisement le pb)
@@ -210,7 +210,7 @@ static int cmd_evaluation(char* buffer, Param_thread * param)
 			// TODO : tester si le format du fichier est OK
 			// ~~~~~~~
 
-			printf("L'utilisateur %d demande à recevoir %s...\n",sd,parameter);
+			printf("Un client demande un fichier partagé (%d - \"%s\").\n",sd,parameter);
 			create_rawdata_filecontent(file_content,parameter);
 			send(sd,file_content,strlen(file_content),0);
 			return 1;
@@ -293,7 +293,7 @@ static int msg_evaluation(char* buffer,Param_thread * param)
 	/* Extractions des informations vitales au traitement du message */
 	int my_sd = get_descriptor(param); // SD du client courant
 	info_client * sheet = get_sheet(param->info_clients_list,param->client_descriptor); // Fiche du client courant
-	TabServices * listof_services = param->services_list; // Tableau de tous les services disponibles
+	TabServices * listof_services = get_listof_services(param); // Tableau de tous les services disponibles
 
 	// Génère la trame à envoyer à tous les clients au format RAWDATA
 	// ([TOKEN]Message[TOKEN]Auteur[TOKEN]Service)
@@ -322,10 +322,11 @@ static int msg_evaluation(char* buffer,Param_thread * param)
 static int CMD_CONNECT_exec(char * data,info_client * sheet,Param_thread * param)
 {
 	char *pch; // Sera utilisé pour stroké DATA (/connect First Nast Services Info)
-	TabServices * listof_services = param->services_list; // La liste de tous les services dispo (& leurs utilisateurs connectés)
+	TabServices * listof_services = get_listof_services(param); // Tableau de tous les services dispo (+ leurs users)
 	int client_descriptor = get_descriptor(param); // Le SD du client courant
 	int num_service_of_active_user; // Recevra le numéro du service de l'utilisateur courant
-	int* index_db_users = param->index_db_users;
+	int* index_db_users = get_index_db_users(param); // L'index des lignes du fichier pour la hashtable
+
 
 	// Variables utilisées pour extraire les info de la BDD
 	int index_hashtable,index_start;
@@ -520,7 +521,7 @@ static void broadcast_rawdata_msg(char* buffer,
 		if(a_descriptor != my_sd)
 		{
 			// On envoie le message rawdata !
-			printf("[SEND] %d -> %d\n",my_sd,a_descriptor);
+			printf("	* Broadcast %d to %d\n",my_sd,a_descriptor);
 			send(a_descriptor, buffer, strlen(buffer), 0);
 		}
 	}
@@ -542,7 +543,7 @@ static void purge_all_connections(Param_thread * param)
 	Tab_Dynamique* descriptors_clients_list = get_descriptors_clients_list(param);
 
 		// Déconnexion du salon
-	printf("\nDéconnexion du client %s (%d) (service %s (%d))...\n",get_lastname(sheet),sd,get_services_from_number(listof_services,num_service),num_service);
+	printf("\nUn client se déconnecte du serveur (%s (%d) - %s).\n",get_lastname(sheet),sd,get_services_from_number(listof_services,num_service));
 
 	// Si l'utilisateur ne s'est jamais connecté à un salon, on ne cherche pas à le déconnecter d'un salon
 	if(sheet->connected == 1)
@@ -553,13 +554,13 @@ static void purge_all_connections(Param_thread * param)
 	// Purge de la liste des clients connectés/déconnectés du-dit salon
 	if(clear_old_connexions(client_service,1))
 	{
-		printf("Nettoyage du tableau de SD du service %d : ",num_service);
+		printf("Nettoyage des listes du service %d : ",num_service);
 		show_descriptors_list(client_service);
 	}
 	// Purge de la liste des clients connectés/déconnectés
 	if(clear_old_connexions(descriptors_clients_list,3))
 	{
-		printf("Nettoyage du tableau de descripteurs sockets : ");
+		printf("Nettoyage des listes du serveur : ");
 		show_descriptors_list(descriptors_clients_list);
 	}
 }
@@ -610,7 +611,7 @@ static void broadcast_rawdata_userslist(Param_thread * param)
 		// On envoie la nouvelle qu'aux autres clients, pas à celui qui se connecte et qui déclenche la MAJ
 		if (sd_to_use != client_descriptor)
 		{
-			printf("Envoi de la nouvelle liste à %d\n",sd_to_use);
+			printf("Un client demande la userlist de son service (%d).\n",sd_to_use);
 
 			// On génère la rawdata_userslist à lui envoyer, et on lui envoie !
 				// 2nd param : la liste des SD des clients connectés au service concerné
@@ -664,7 +665,7 @@ static void create_rawdata_filecontent(char * buffer, char* file)
 	FILE * filestream = fopen(path,"r");
 	if(filestream == NULL)
 	{
-		printf("Tentative d'ouverture de %s qui n'existe pas...\n",path);
+		printf("Un client demande le fichier \"%s\" mais celui-ci n'existe pas.\n",path);
 		strcpy(buffer,"/SYS");
 		strcat(buffer,TRAME_SEPARATOR);
 		strcat(buffer,"600");
@@ -692,11 +693,12 @@ static void create_doc(char *buffer)
 	strcpy(buffer,"/SYS+700+========================\n");
 	strcat(buffer,"Bienvenue dans Diskutim !\n");
 	strcat(buffer,"Voici les commandes principales du logiciel :\n");
-	strcat(buffer,"	/connect <username> <password> <service> : commande de connexion\n");
+	strcat(buffer,"	/connect <username> <password> <service> : connexion au serveur\n");
 	strcat(buffer,"	/services : affiche la liste des services disponibles\n");
 	strcat(buffer,"	/users : affiche la liste des utilisateurs connectés à votre services\n");
 	strcat(buffer,"	/files : affiche la liste des fichiers partagés\n");
 	strcat(buffer,"	/get <fichier> : affiche le contenu de <fichier>\n");
+	strcat(buffer,"	/adduser <prenom> <nom> <statut> : ajoute un utilisateur (none,hop,aop,sop)\n");
 	strcat(buffer,"	/quit : vous deconnecte du serveur\n");
 	strcat(buffer,"Enjoy ! :-)\n");
 	strcat(buffer,"========================\n");

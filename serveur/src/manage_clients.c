@@ -11,10 +11,20 @@
 ============================
 */
 
+/**
+	Retourne le pointeur sur l'index des lignes de la DB
+	@param param Les param du thread
+	@return Le pointeur sur l'index
+*/
+int* get_index_db_users(const Param_thread* param)
+{
+	return param->index_db_users;
+}
+
 /** Retourne le prénom d'un client
 	@param sheet Sa fiche client personnelle
 	@return Son prénom */
-char* get_firstname(info_client * sheet)
+const char* get_firstname(const info_client * sheet)
 {
 	return sheet->firstname;
 }
@@ -22,7 +32,7 @@ char* get_firstname(info_client * sheet)
 /** Retourne le nom d'un client
 	@param sheet Sa fiche client personnelle
 	@return Son nom */
-char* get_lastname(info_client * sheet)
+const char* get_lastname(const info_client * sheet)
 {
 	return sheet->lastname;
 }
@@ -30,15 +40,16 @@ char* get_lastname(info_client * sheet)
 /** Retourne le service d'un client
 	@param sheet Sa fiche client personnelle
 	@return Son service */
-int get_service_int(info_client * sheet)
+int get_service_int(const info_client * sheet)
 {
 	return sheet->service;
 }
 
 /** Retourne le service d'un client
+	@param listof La liste des services
 	@param sheet Sa fiche client personnelle
 	@return Son service */
-char* get_service_char(TabServices * listof, info_client * sheet)
+const char* get_service_char(const TabServices * listof, const info_client * sheet)
 {
 	return get_services_from_number(listof,sheet->service);
 }
@@ -46,7 +57,7 @@ char* get_service_char(TabServices * listof, info_client * sheet)
 /** Retourne les info complémentaires d'un client
 	@param sheet Sa fiche client personnelle
 	@return Ses infos OTHERS */
-char* get_others(info_client * sheet)
+const char* get_others(const info_client * sheet)
 {
 	return sheet->others;
 }
@@ -54,15 +65,24 @@ char* get_others(info_client * sheet)
 /** Retourne le descripteur du client
 	@param param Le param envoyé au thread pour chaque client
 	@return L'ID du socket du client concerné par le thread */
-int get_descriptor(Param_thread * param)
+int get_descriptor(const Param_thread * param)
 {
 	return param->client_descriptor;
+}
+
+/** Determine si un utilisateur est connecté
+	@param sheet fiche de l'utilisateur
+	@return 1 si oui, 0 si non
+*/
+int get_connected(const info_client * sheet)
+{
+	return sheet->connected;
 }
 
 /** Retourne la liste de toutes les fiches clients
 	@param param Le param envoyé au thread pour chaque client
 	@return L'adresse de la liste d'info de tous les clients (globale, unique) */
-info_client* get_info_clients_list(Param_thread * param)
+info_client* get_info_clients_list(const Param_thread * param)
 {
 	return param->info_clients_list;
 }
@@ -70,7 +90,7 @@ info_client* get_info_clients_list(Param_thread * param)
 /** Retourne la liste de toutes les fiches clients
 	@param param Le param envoyé au thread pour chaque client
 	@return L'adresse de la liste d'info de tous les clients (globale, unique) */
-Tab_Dynamique* get_descriptors_clients_list(Param_thread * param)
+Tab_Dynamique* get_descriptors_clients_list(const Param_thread * param)
 {
 	return param->clients_list;
 }
@@ -79,7 +99,7 @@ Tab_Dynamique* get_descriptors_clients_list(Param_thread * param)
 	@param listof La liste des descripteurs clients actuels
 	@param n La position du descripteur à renvoyer
 	@return Le descripteur socket en position n (entier positif ou négatif selon CONNECTED ou NON) */
-int getn_client_descriptor_value(Tab_Dynamique* listof, int n)
+int getn_client_descriptor_value(const Tab_Dynamique* listof, int n)
 {
 	return listof->ad[n];
 }
@@ -88,9 +108,9 @@ int getn_client_descriptor_value(Tab_Dynamique* listof, int n)
 	@param listof La liste des fiches de tous les clients connectés
 	@param sd Le descripteur socket du client dont on veut la fiche
 	@return L'adresse de sa fiche */
-info_client* get_sheet(info_client* listof, int sd)
+info_client* get_sheet(const info_client* listof, int sd)
 {
-	return (listof+sd);
+	return (info_client*)(listof+sd);
 }
 
 
@@ -152,13 +172,8 @@ void remove_descriptor_form_list(Tab_Dynamique* listof, int sd)
 
 /** Affiche la liste des DESCRIPTORS clients (tous)
 	@param listof La liste des descriptors clients */
-void show_descriptors_list(Tab_Dynamique* listof)
+void show_descriptors_list(const Tab_Dynamique* listof)
 {
 	affiche_tab(listof);
 	printf("\n");
-}
-
-int get_connected(info_client * sheet)
-{
-	return sheet->connected;
 }
