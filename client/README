@@ -13,8 +13,8 @@
 ====== DEPENDANCES ======
 
   * Bibliotheques graphiques : 
-	$ aptitude install gtk3+-lib
-	$ yum install gtk3+-devel
+	$ aptitude install libgtk3.0-dev
+	$ yum install gtk3-devel
 
 ====== COMPILATION ======
 
@@ -27,8 +27,10 @@
 ======= EXECUTION =======
 
   * Lancer le serveur
-  * Configurer ./data/config.ini
-  * $ ./bin/diskutim
+  * (facultatif) Configurer le client
+	$ vi ./data/config.ini
+  * Lancer le client
+	$ ./bin/diskutim
 
 ======= UTILISATEUR PAR DEFAUT =======
 

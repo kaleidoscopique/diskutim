@@ -4,7 +4,7 @@
 | |  | || |  \___ \|  < | |  | |  | |    | | | |\/| |
 | |__| || |_ ____) | . \| |__| |  | |   _| |_| |  | |
 |_____/_____|_____/|_|\_\\____/   |_|  |_____|_|  |_|
-
+	Serveur
 
 ======== LICENCE ========
 
@@ -13,8 +13,8 @@
 ====== DEPENDANCES ======
 
   * Bibliotheques cryptographiques :
-	$ aptitude install gcrypt-lib
-	$ yum install gcrypt-devel
+	$ aptitude install libgcrypt-dev libgcrypt11-dev
+	$ yum install libgcrypt-devel
 
 ====== COMPILATION ======
 
@@ -24,7 +24,7 @@
 ======= EXECUTION =======
 
   * Lancer le serveur
-    $ ./bin/serveur
+    	$ ./bin/serveur
 
 ====================
 
