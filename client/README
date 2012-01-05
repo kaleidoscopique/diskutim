@@ -13,8 +13,8 @@
 ====== DEPENDANCES ======
 
   * Bibliotheques graphiques : 
-	$ aptitude install libgtk3.0-dev
-	$ yum install gtk3-devel
+	$ apt-get install libgtk3-0-dev 	(Debian/Ubuntu)
+	$ yum install gtk3-devel 		(Fedora)
 
 ====== COMPILATION ======
 
