@@ -16,8 +16,8 @@ Le serveur n'envoie que des messages commençant par un slash ("/"). Note : le s
 == Commandes client ==
 
 Le client dispose des commandes suivantes :
-  * */services* : demande la liste des services disponibles
-  * */users* : demande la liste des utilisateurs connectés au service
-  * */files* : demande la liste des fichiers partagés au serveur
-  * */get <file>* : demande le fichier partagé <file> au serveur
-  * */quit* : déconnecte le client
+  * *{{{/services}}}* : demande la liste des services disponibles
+  * *{{{/users}}}* : demande la liste des utilisateurs connectés au service
+  * *{{{/files}}}* : demande la liste des fichiers partagés au serveur
+  * *{{{/get <file>}}}* : demande le fichier partagé <file> au serveur
+  * *{{{/quit}}}* : déconnecte le client
