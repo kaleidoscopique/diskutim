@@ -71,8 +71,8 @@ int parse_users_db(int* index)
     {
         printf("Erreur lors de l'ouverture de la base de données USERS\n");
     }
-    return num_line+1;
     fclose(users_bd);
+    return num_line+1;
 }
 
 /**
