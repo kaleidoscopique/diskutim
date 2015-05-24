@@ -1,0 +1,33 @@
+## Permissions ##
+200 - Autorisation refusée
+
+## Connexion ##
+400 - Connexion réussie
+
+300 - Le client ne donne aucune information de connexion
+
+302 - Le client n'indique pas de mot de passe
+
+303 - Le client n'indique aucun service
+
+304 - Le service indiqué par le client n'existe pas
+
+305 - Le mot de passe indiqué ne correspond pas au login
+
+306 - Le login indiqué n'existe pas dans la base de données
+
+
+## Utilisation générale ##
+501 - La commande demandée nécessite d'être authentifié
+
+502 - La commande demandée n'existe pas
+
+600 - Le fichier demandé (`/GET`) n'existe pas
+
+## Gestion des utilisateurs ##
+800 - Succès de création (retourne le mot de passe généré)
+
+801 - Une erreur est survenue lors de l'ajout
+
+## Code de doc ##
+700 - Transmet la documentation (`/help`) au client
